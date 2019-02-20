@@ -11,11 +11,6 @@ get "/" do
   haml :index, locals: { posts: posts }
 end
 
-get "/posts/:id" do |id|
-  post = Blog.get_post(id, store)
-  haml :show, locals: { post: post }
-end
-
 get "/posts/new" do
   form = Blog.new_post_form
   haml :new, locals: { form: form }
@@ -24,6 +19,11 @@ end
 post "/posts" do
   Blog.create_post(params, store)
   redirect to("/")
+end
+
+get "/posts/:id" do |id|
+  post = Blog.get_post(id, store)
+  haml :show, locals: { post: post }
 end
 
 get "/posts/:id/edit" do |id|

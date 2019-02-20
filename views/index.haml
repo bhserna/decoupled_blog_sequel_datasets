@@ -1,5 +1,7 @@
 %h1 Posts
+%a(href="/posts/new") New post
 
-- posts.each do |post|
-  %a{href: "posts/#{post.id}"}= post.title
-  %p= post.description
+%div
+  - posts.each do |post|
+    %a{href: "posts/#{post.id}"}= post.title
+    %p= post.description
