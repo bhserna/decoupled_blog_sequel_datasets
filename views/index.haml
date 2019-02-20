@@ -1,0 +1,5 @@
+%h1 Posts
+
+- posts.each do |post|
+  %a{href: "posts/#{post.id}"}= post.title
+  %p= post.description
