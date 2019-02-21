@@ -1,3 +1,9 @@
-%h1= post.title
-%a{href: "/posts/#{post.id}/edit"} Edit post
-%p= post.body
+.page-header
+  %h1= post.title
+  %a.mr3{href: "/posts/#{post.id}/edit"} Edit post
+
+.lh-copy= post.body
+
+%form(action="/posts/#{post.id}" method="POST")
+  %input(type="hidden" name="_method" value="DELETE")
+  %button.mt5.fr.delete-button.grow Delete post

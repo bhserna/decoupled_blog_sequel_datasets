@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    :css
+      label {
+        display: block;
+        margin-bottom: .25rem;
+      }
+
+      input, textarea {
+        padding: .5rem;
+        font-size: 1rem;
+        border-color: rgba(0,0,0,.2);
+        border-radius: .125rem;
+        border-style: solid;
+        border-width: 1px;
+      }
+
+      button {
+        padding: .5rem 1rem;
+        color: white;
+        border: none;
+        border-radius: .25rem;
+        background-color: black;
+      }
+
+      .delete-button {
+        color: red;
+        background-color: white;
+        border-style: solid;
+        border-width: 1px;
+        border-color: red;
+      }
+
+      .page-header {
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      
+    %link(rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css")
+  %body.sans-serif.mw7.pa3.center
+    != yield

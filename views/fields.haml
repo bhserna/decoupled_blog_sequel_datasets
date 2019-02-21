@@ -1,0 +1,19 @@
+.mb3
+  %label(for="title") Title
+  %input.w-100{name: "title",
+    type: "text",
+    value: form.title}
+
+  - if errors = form.errors[:title]
+    .mt2.red= errors.join(", ")
+
+.mb3
+  %label(for="description") Description
+  %input.w-100{name: "description",
+    type: "text",
+    value: form.description}
+
+.mb3
+  %label(for="body") Body
+  %textarea.w-100(name="body" rows=10)
+    = form.body

@@ -129,7 +129,7 @@ module Blog
 
     def update(id, attrs)
       @all = all.map do |record|
-        if record.id == id
+        if has_id?(record, id)
           update_record(record, attrs)
         else
           record
@@ -142,14 +142,18 @@ module Blog
     end
 
     def destroy(id)
-      @all = all.reject { |record| record.id == id }
+      @all = all.reject { |record| has_id?(record, id) }
     end
 
     def find(id)
-      all.find { |record| record.id.to_s == id.to_s } || :no_record
+      all.find { |record| has_id?(record, id) } || :no_record
     end
 
     private
+
+    def has_id?(record, id)
+      record.id.to_s == id.to_s
+    end
 
     def update_record(record, attrs)
       Post.new(record.attributes.merge(attrs))

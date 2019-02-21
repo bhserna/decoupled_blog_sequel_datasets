@@ -1,7 +1,8 @@
-%h1 Posts
-%a(href="/posts/new") New post
+.page-header
+  %h1 Posts
+  %a(href="/posts/new") New post
 
-%div
-  - posts.each do |post|
-    %a{href: "posts/#{post.id}"}= post.title
-    %p= post.description
+- posts.each do |post|
+  .mb4
+    %a.db.mb2.f4{href: "posts/#{post.id}"}= post.title
+    .lh-copy= post.description

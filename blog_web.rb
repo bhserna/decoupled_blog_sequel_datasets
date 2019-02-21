@@ -2,9 +2,15 @@ require "sinatra"
 require "hamlit"
 require_relative "lib/blog"
 
-store = Blog::Store.new([
-  Blog::Post.new(id: 1, title: "My post", description: "hola", body: "mundo")
-])
+posts = (1..5).map do |id|
+  Blog::Post.new(
+    id: id,
+    title: "Lorem ipsum dolor sit amet",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
+    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+end
+
+store = Blog::Store.new(posts)
 
 get "/" do
   posts = Blog.list_posts(store)
@@ -17,8 +23,13 @@ get "/posts/new" do
 end
 
 post "/posts" do
-  Blog.create_post(params, store)
-  redirect to("/")
+  status = Blog.create_post(params, store)
+
+  if status.success?
+    redirect to("/")
+  else
+    haml :new, locals: { form: status.form }
+  end
 end
 
 get "/posts/:id" do |id|
@@ -28,12 +39,17 @@ end
 
 get "/posts/:id/edit" do |id|
   form = Blog.edit_post_form(id, store)
-  haml :edit, locals: { form: form }
+  haml :edit, locals: { form: form, post_id: id }
 end
 
 put "/posts/:id" do |id|
-  Blog.update_post(id, params, store)
-  redirect to("/")
+  status = Blog.update_post(id, params, store)
+
+  if status.success?
+    redirect to("/")
+  else
+    haml :edit, locals: { form: status.form, post_id: id }
+  end
 end
 
 delete "/posts/:id" do |id|

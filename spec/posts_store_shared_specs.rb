@@ -48,7 +48,7 @@ module Blog
         records = subject.all
         record = records.first
 
-        subject.update(record.id, title: "AA", body: "BB", description: "CC")
+        subject.update(record.id.to_s, title: "AA", body: "BB", description: "CC")
 
         records = subject.all
         record = records.first
@@ -68,7 +68,7 @@ module Blog
         records = subject.all
         record = records.first
 
-        subject.destroy(record.id)
+        subject.destroy(record.id.to_s)
 
         records = subject.all
         expect(records.count).to eq 0
