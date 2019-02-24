@@ -1,4 +1,5 @@
 require "date"
+require "securerandom"
 
 module Blog
   def self.list_posts(store)
@@ -138,7 +139,7 @@ module Blog
     end
 
     def create(attrs)
-      all << Post.new(attrs.merge(id: all.count + 1))
+      all << Post.new(attrs.merge(id: SecureRandom.uuid))
     end
 
     def destroy(id)
