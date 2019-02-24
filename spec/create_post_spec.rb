@@ -9,7 +9,11 @@ module Blog
     end
 
     def create_post(params, store)
-      Blog.create_post(params, store)
+      Blog.create_post(params, store, current_time)
+    end
+
+    def current_time
+      @current_time ||= Time.now
     end
 
     describe "form..." do
@@ -49,7 +53,8 @@ module Blog
         expect(store).to receive(:create).with(
           title: "P1",
           body: "Body...",
-          description: "Desc...")
+          description: "Desc...",
+          created_at: current_time)
         create_post(params, store)
       end
     end

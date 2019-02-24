@@ -3,7 +3,7 @@ require "securerandom"
 
 module Blog
   def self.list_posts(store)
-    store.all
+    store.all.sort_by(&:created_at).reverse
   end
 
   def self.get_post(id, store)
@@ -14,9 +14,9 @@ module Blog
     PostForm.new
   end
 
-  def self.create_post(params, store)
+  def self.create_post(params, store, current_time = Time.now)
     ProcessPostForm.(params) do |form|
-      store.create(form.to_h)
+      store.create(form.to_h.merge(created_at: current_time))
     end
   end
 
@@ -104,18 +104,18 @@ module Blog
   end
 
   class Post
-    attr_reader :id, :title, :body, :description, :published_on
+    attr_reader :id, :title, :body, :description, :created_at
 
     def initialize(attrs)
       @id = attrs[:id]
       @title = attrs[:title]
       @description = attrs[:description]
-      @published_on = attrs[:published_on]
+      @created_at = attrs[:created_at]
       @body = attrs[:body]
     end
 
     def attributes
-      [:id, :title, :body, :description, :published_on].map do |key|
+      [:id, :title, :body, :description, :created_at].map do |key|
         [key, send(key)]
       end.to_h
     end
