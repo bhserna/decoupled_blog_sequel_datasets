@@ -2,6 +2,9 @@
   %h1= post.title
   %a.mr3{href: "/posts/#{post.id}/edit"} Edit post
 
+%p.lh-copy
+  %i= post.description
+
 .lh-copy= post.body
 
 %form(action="/posts/#{post.id}" method="POST")

@@ -28,12 +28,14 @@ module Blog
           id: 1,
           title: "Post 1",
           description: "Desc...",
+          body: "Body...",
           created_at: current_time)])
       post = get_post(1, store)
       expect(post).to have_attributes(
         id: 1,
         title: "Post 1",
         description: "Desc...",
+        body: "Body...",
         created_at: current_time
       )
     end
