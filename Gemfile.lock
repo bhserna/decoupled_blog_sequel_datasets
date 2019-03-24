@@ -7,6 +7,7 @@ GEM
       thor
       tilt
     mustermann (1.0.3)
+    pg (1.1.4)
     rack (2.0.6)
     rack-protection (2.0.5)
       rack
@@ -23,6 +24,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    sequel (5.18.0)
     sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -37,7 +39,9 @@ PLATFORMS
 
 DEPENDENCIES
   hamlit
+  pg
   rspec
+  sequel
   sinatra
 
 BUNDLED WITH

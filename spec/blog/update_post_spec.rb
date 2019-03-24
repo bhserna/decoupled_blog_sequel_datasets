@@ -1,11 +1,7 @@
 module Blog
   RSpec.describe "Update post" do
     def store_with(records)
-      Store.new(records)
-    end
-
-    def post_with(attrs)
-      Post.new(attrs)
+      FakeStore.new(records)
     end
 
     def edit_post_form(id, store)

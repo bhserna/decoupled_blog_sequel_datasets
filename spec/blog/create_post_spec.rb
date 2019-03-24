@@ -1,7 +1,7 @@
 module Blog
   RSpec.describe "Create post" do
     def empty_store
-      Store.new
+      FakeStore.new
     end
 
     def new_post_form

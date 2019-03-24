@@ -1,11 +1,7 @@
 module Blog
   RSpec.describe "List posts" do
     def store_with(records)
-      Store.new(records)
-    end
-
-    def post_with(attrs)
-      Post.new(attrs)
+      FakeStore.new(records)
     end
 
     def list_posts(store)

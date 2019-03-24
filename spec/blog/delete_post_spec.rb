@@ -1,11 +1,7 @@
 module Blog
   RSpec.describe "Delete post" do
     def store_with(records)
-      Store.new(records)
-    end
-
-    def post_with(attrs)
-      Post.new(attrs)
+      FakeStore.new(records)
     end
 
     def delete_post(id, store)
