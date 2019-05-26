@@ -3,7 +3,7 @@ require "hamlit"
 require_relative "lib/blog"
 require_relative "lib/store"
 
-store = Store::Post
+store = Store.new
 
 get "/" do
   posts = Blog.list_posts(store)

@@ -1,17 +1,35 @@
 require_relative "../db/config"
 
-module Store
-  class Post < Sequel::Model
-    def self.find(id)
-      first(id: id)
-    end
+class Store
+  def initialize
+    @records = DB[:posts]
+  end
 
-    def self.update(id, attrs)
-      find(id).update(attrs)
-    end
+  def all
+    records.all.map(&method(:build))
+  end
 
-    def self.destroy(id)
-      find(id).destroy
-    end
+  def update(id, attrs)
+    records.where(id: id).update(attrs)
+  end
+
+  def create(attrs)
+    records.insert(attrs)
+  end
+
+  def destroy(id)
+    records.where(id: id).delete
+  end
+
+  def find(id)
+    build(records.first(id: id)) || :no_record
+  end
+
+  private
+
+  attr :records
+
+  def build(record)
+    Blog::Post.new(record)
   end
 end
